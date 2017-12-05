@@ -1,0 +1,2 @@
+# biedascript
+Biedny język
