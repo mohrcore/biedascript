@@ -18,7 +18,7 @@ Ludwik Andegaweński
 Św Jadwiga
 Władysław Jagiełło
 Władysław Warneńczyk
-Kazimierz JAgiellończyk
+Kazimierz Jagiellończyk
 Jan Olbracht
 Aleksander Jagiellończyk
 Zygmunt Stary
@@ -101,7 +101,7 @@ pub struct Procedure {
 
 impl Procedure {
     
-    pub fn execute<E>(&self, mut stack: Vec<scope_::ScopedValue>, proc_list: &Vec<Procedure>) -> Result<Vec<scope_::ScopedValue>, E>
+    pub fn execute<E>(&self, mut stack: Vec<scope_::ScopedValue>, proc_list: &Vec<Procedure>, debug: bool) -> Result<Vec<scope_::ScopedValue>, E>
     where E: FromStr {
 
         let mut scope: Vec<scope_::ScopedValue> = vec![scope_::ScopedValue::Empty; self.scope_size as usize];
@@ -112,7 +112,7 @@ impl Procedure {
         while ct_id < self.proc_tokens.len() as i64 {
 
             let p_token = &self.proc_tokens[ct_id as usize];
-            println!("Currently processing token {}: {:?}", ct_id, p_token);
+            if debug { println!("Currently processing token {}: {:?}", ct_id, p_token) };
             ct_id += 1;
 
             match *p_token {
@@ -146,9 +146,9 @@ impl Procedure {
                 }
                 Pop => { stack.pop(); },
                 ExecuteProc(proc_id) => {
-                    println!("Entering procedure {}", proc_id);
-                    stack = proc_list[proc_id as usize].execute(stack, &proc_list)?;
-                    println!("Procedure {} end.", proc_id);
+                    if debug { println!("Entering procedure {}", proc_id) };
+                    stack = proc_list[proc_id as usize].execute(stack, &proc_list, debug)?;
+                    if debug { println!("Procedure {} end.", proc_id) };
 
                 },
                 Goto(p) => ct_id = p,

@@ -1,7 +1,7 @@
 //use ::std::hash;
 //use ::std::collections::hash_map::DefaultHasher;
 
-
+/*
 pub fn pmatch_str<'a>(s: &'a str, pattern: &[&str]) -> Option<Vec<&'a str>> {
 
     let mut res = Vec::<&'a str>::new();
@@ -25,3 +25,4 @@ pub fn pmatch_str<'a>(s: &'a str, pattern: &[&str]) -> Option<Vec<&'a str>> {
 
     Some(res)
 }
+*/

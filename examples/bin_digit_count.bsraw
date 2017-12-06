@@ -1,0 +1,35 @@
+PROC 1 4
+    WriteToMemS_NP 0
+    Pop
+    PushVal int 31
+    WriteToMemS_NP 1
+    Pop
+    PushFromMemS 0
+    PushVal int 1
+    PushFromMemS 1
+    BitL
+    AND
+    PushVal int 0
+    EQ
+    PushVal int 0
+    PushFromMemS 1
+    LSEQ
+    AND
+    GotoIf 21
+    PushFromMemS 1
+    PushVal int 1
+    Add
+    Return
+    PushFromMemS 1
+    PushVal int 1
+    Sub
+    WriteToMemS_NP 1
+    Pop
+    Goto 5
+PROC_END
+        
+PROC 0 0
+    PushVal int 16
+    ExecuteProc 1
+    Return
+PROC_END
